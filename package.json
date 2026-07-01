@@ -1,0 +1,16 @@
+{
+  "name": "easily_job_portal_mvc",
+  "version": "1.0.0",
+  "description": "easily  job portal website using mvc",
+  "license": "ISC",
+  "author": "abhinav",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "path": "^0.12.7"
+  }
+}
