@@ -1,7 +1,7 @@
 export default class HomeController
 {
-    getHome(req,res)
+    Homepage(req,res)
     {
-        res.sendFile('index.html')
+        res.render('index')
     }
 }
