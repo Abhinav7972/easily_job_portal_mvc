@@ -1,0 +1,6 @@
+<section class="page-heading"><div><p class="eyebrow">RECRUITER DESK</p><h1>Post a new job</h1><p>Give candidates the details they need to say yes.</p></div></section>
+<form class="panel form job-form" action="/jobs" method="POST">
+  <%- include('../partials/errors', { errors }) %>
+  <%- include('../partials/job-form', { job }) %>
+  <button class="btn" type="submit">Publish job</button>
+</form>

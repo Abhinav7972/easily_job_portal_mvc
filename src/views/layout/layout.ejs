@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easily</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easily | Job Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
- 
- <%-include('../partials/header')%>
-
-<%-body%>
-
-<%-include('../partials/footer')%>
+  <%- include('../partials/header') %>
+  <main class="container">
+    <% if (message) { %><div class="flash"><%= message %></div><% } %>
+    <%- body %>
+  </main>
+  <%- include('../partials/footer') %>
 </body>
 </html>

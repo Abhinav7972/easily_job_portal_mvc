@@ -1,0 +1,6 @@
+<section class="page-heading"><div><p class="eyebrow">CANDIDATE PIPELINE</p><h1>Applicants for <%= job.job_designation %></h1><p><%= applicants.length %> application<%= applicants.length === 1 ? '' : 's' %></p></div><a href="/jobs/<%= job.id %>">Back to job →</a></section>
+<div class="panel table-wrap">
+  <% if (applicants.length) { %><table><thead><tr><th>Name</th><th>Email</th><th>Contact</th><th>Applied</th><th>Resume</th></tr></thead><tbody>
+    <% applicants.forEach((applicant) => { %><tr><td><strong><%= applicant.name %></strong></td><td><a href="mailto:<%= applicant.email %>"><%= applicant.email %></a></td><td><%= applicant.contact %></td><td><%= new Date(applicant.appliedAt).toLocaleString() %></td><td><a class="btn small" href="/jobs/<%= job.id %>/applicants/<%= applicant.id %>/resume">Download</a></td></tr><% }) %>
+  </tbody></table><% } else { %><div class="empty"><h2>No applicants yet</h2><p>Applications will appear here as they arrive.</p></div><% } %>
+</div>

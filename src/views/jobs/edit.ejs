@@ -1,0 +1,7 @@
+<section class="page-heading"><div><p class="eyebrow">RECRUITER DESK</p><h1>Edit job</h1><p>Keep this opportunity accurate and useful.</p></div></section>
+<form class="panel form job-form" action="/jobs/<%= job.id %>/update" method="POST">
+  <%- include('../partials/errors', { errors }) %>
+  <%- include('../partials/job-form', { job }) %>
+  <div class="actions"><button class="btn" type="submit">Save changes</button><a class="btn secondary" href="/jobs/<%= job.id %>">Cancel</a></div>
+</form>
+<form class="danger-zone" action="/jobs/<%= job.id %>/delete" method="POST" onsubmit="return confirm('Delete this job and all its applications?')"><button class="danger-button" type="submit">Delete job</button></form>

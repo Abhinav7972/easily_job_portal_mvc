@@ -1,26 +1,53 @@
-import express from 'express'
-import path  from 'path'
-import EjsLayouts from 'express-ejs-layouts';
-import homeRoute from './src/routes/homeRoute.js';
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import expressLayouts from 'express-ejs-layouts';
+import homeRouter from './src/routes/homeRoute.js';
+import authRouter from './src/routes/authRoutes.js';
+import jobRouter from './src/routes/jobRoutes.js';
+import applicantRouter from './src/routes/applicantRoutes.js';
+import { exposeSession } from './src/middlewares/auth.js';
+import { trackLastVisit } from './src/middlewares/lastVisit.js';
 
+const server = express();
+const PORT = process.env.PORT || 3000;
 
-const server = new express();
+server.set('views', path.resolve('src', 'views'));
+server.set('view engine', 'ejs');
+server.set('layout', 'layout/layout');
 
+server.use(expressLayouts);
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
+server.use(cookieParser());
+server.use(session({
+  name: 'easily.sid',
+  secret: process.env.SESSION_SECRET || 'change-this-development-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { httpOnly: true, sameSite: 'lax', maxAge: 24 * 60 * 60 * 1000 },
+}));
+server.use(trackLastVisit);
+server.use(exposeSession);
+server.use(express.static(path.resolve('public')));
 
-//server.use(express.static('src/views'));
+server.use('/', homeRouter);
+server.use('/', authRouter);
+server.use('/', applicantRouter);
+server.use('/jobs', jobRouter);
 
-//set up views path 
-server.set('views',path.join(path.resolve(),'src','views'));
+server.use((_req, res) => res.status(404).render('errors/404'));
+server.use((error, req, res, _next) => {
+  console.error(error);
+  if (res.locals.job && (error.name === 'MulterError' || error.message.includes('Resume'))) {
+    return res.status(400).render('jobs/detail', {
+      job: res.locals.job,
+      applicationErrors: [error.code === 'LIMIT_FILE_SIZE' ? 'Resume must be smaller than 5 MB.' : error.message],
+      applicationValues: req.body || {},
+    });
+  }
+  return res.status(500).render('errors/500');
+});
 
-//setup view engine and ejs layput middleware
-server.set('view engine','ejs')
-server.use(EjsLayouts)
-
-//setup path  to layout.ejs
-server.set('layout','layout/layout');
-
-//route
-server.use('/',homeRoute) //home page 
-
-
-server.listen(3000,()=>console.log('server began at 3000'))
+server.listen(PORT, () => console.log(`Easily is running at http://localhost:${PORT}`));

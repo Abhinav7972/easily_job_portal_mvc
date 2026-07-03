@@ -1,0 +1,10 @@
+<section class="form-shell">
+  <div><p class="eyebrow">WELCOME BACK</p><h1>Recruiter login</h1><p>Manage jobs and review your applicants.</p></div>
+  <form class="panel form" action="/login" method="POST">
+    <%- include('../partials/errors', { errors }) %>
+    <label>Email<input type="email" name="email" value="<%= values.email || '' %>" required autocomplete="email"></label>
+    <label>Password<input type="password" name="password" required autocomplete="current-password"></label>
+    <button class="btn" type="submit">Log in</button>
+    <p>Need an account? <a href="/register">Register</a></p>
+  </form>
+</section>

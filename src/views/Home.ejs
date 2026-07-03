@@ -1,27 +1,15 @@
-<div class="hero-section">
-<h1>Find Your Dream Job Easily</h1>
-<p>Welcome to Easily – The streamlined job portal for seekers and recruiters.</p>
-<a href="/jobs" class="btn">Browse Jobs</a>
-</div>
+<section class="hero">
+  <p class="eyebrow">CAREERS, WITHOUT THE CLUTTER</p>
+  <h1>Find work that feels like a step forward.</h1>
+  <p>Explore fresh opportunities, apply in minutes, or find the next great person for your team.</p>
+  <div class="actions"><a class="btn" href="/jobs">Explore jobs</a><a class="btn secondary" href="/jobs/new">Post a job</a></div>
+</section>
 
-<div class="featured-jobs">
-<h2>Featured Jobs</h2>
-<div class="jobs-list">
-<% /* Loop through featured jobs if dynamic */ %>
-<!-- Example static job -->
-<div class="job-card">
-<h3>Frontend Developer</h3>
-<p>ABC Company</p>
-<a href="#">View Details</a>
-</div>
-</div>
-</div>
-
-<div class="steps-section">
-<h2>How It Works</h2>
-<ul>
-<li>Register</li>
-<li>Search Jobs</li>
-<li>Apply Online</li>
-</ul>
-</div>
+<section class="section">
+  <div class="section-heading"><div><p class="eyebrow">FEATURED</p><h2>Roles worth a look</h2></div><a href="/jobs">View all jobs →</a></div>
+  <div class="card-grid">
+    <% featuredJobs.forEach((job) => { %>
+      <article class="job-card"><span class="tag"><%= job.job_category %></span><h3><%= job.job_designation %></h3><p><%= job.company_name %> · <%= job.job_location %></p><a href="/jobs/<%= job.id %>">View details →</a></article>
+    <% }) %>
+  </div>
+</section>

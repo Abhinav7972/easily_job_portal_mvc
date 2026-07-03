@@ -1,0 +1,13 @@
+<section class="page-heading"><div><p class="eyebrow">OPEN OPPORTUNITIES</p><h1>Find your next role</h1><p><%= jobs.length %> position<%= jobs.length === 1 ? '' : 's' %> available</p></div><% if (user) { %><a class="btn" href="/jobs/new">Post a job</a><% } %></section>
+<div class="card-grid">
+  <% jobs.forEach((job) => { %>
+    <article class="job-card">
+      <div><span class="tag"><%= job.job_category %></span><h2><%= job.job_designation %></h2><p class="company"><%= job.company_name %></p></div>
+      <dl class="job-meta"><div><dt>Location</dt><dd><%= job.job_location %></dd></div><div><dt>Salary</dt><dd><%= job.salary %></dd></div><div><dt>Openings</dt><dd><%= job.number_of_openings %></dd></div></dl>
+      <div class="actions"><a class="btn" href="/jobs/<%= job.id %>">View details</a>
+        <% if (user && job.recruiterId === user.id) { %><a class="btn secondary" href="/jobs/<%= job.id %>/edit">Edit</a><a href="/jobs/<%= job.id %>/applicants">Applicants (<%= job.applicants.length %>)</a><% } %>
+      </div>
+    </article>
+  <% }) %>
+  <% if (!jobs.length) { %><div class="empty panel"><h2>No jobs yet</h2><p>Check back soon for new opportunities.</p></div><% } %>
+</div>

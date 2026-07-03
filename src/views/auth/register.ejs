@@ -1,0 +1,11 @@
+<section class="form-shell">
+  <div><p class="eyebrow">FOR RECRUITERS</p><h1>Create your account</h1><p>Start posting roles and managing applicants.</p></div>
+  <form class="panel form" action="/register" method="POST">
+    <%- include('../partials/errors', { errors }) %>
+    <label>Name<input name="name" value="<%= values.name || '' %>" required minlength="2" autocomplete="name"></label>
+    <label>Email<input type="email" name="email" value="<%= values.email || '' %>" required autocomplete="email"></label>
+    <label>Password<input type="password" name="password" required minlength="6" autocomplete="new-password"></label>
+    <button class="btn" type="submit">Create account</button>
+    <p>Already registered? <a href="/login">Log in</a></p>
+  </form>
+</section>
