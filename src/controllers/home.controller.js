@@ -1,6 +1,6 @@
 export default class HomeController
 {
-    Homepage(req,res)
+    static Homepage(req,res)
     {
         res.render('Home')
     }
